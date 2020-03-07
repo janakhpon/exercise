@@ -3,7 +3,7 @@ import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid'
 
 import PageContainer from './Components/Container'
-import PageData, { countryOptions } from './Components/Data'
+import PageData from './Components/Data'
 
 const App = () => {
   return (
@@ -13,14 +13,10 @@ const App = () => {
           <h1>Exercise</h1>
         </Grid>
         <Grid item xs={12}>
-          <PageContainer />
+          <PageData />
         </Grid>
         <Grid item xs={12}>
-          <PageData />
-          <hr />
-          {
-            console.log(countryOptions)
-          }
+          <PageContainer />
         </Grid>
       </Grid>
     </Container>

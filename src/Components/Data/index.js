@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useQuery } from '@apollo/react-hooks'
 
 import { GET_COUNTRIES } from '../Queries'
@@ -50,9 +50,7 @@ const PageData = () => {
             return countryOptions.push(formattedvalue)
         });
 
-
-
-        return <></>
+    return null
     }
 
 }
