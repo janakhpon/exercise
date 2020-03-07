@@ -7,7 +7,7 @@ const PageLoading = () => {
     return(
         <Grid container spacing={1}>
             <Grid item xs={12} className={styles.alertContainer}>
-                <h1>404</h1>
+                <h4>Loading ....</h4>
             </Grid>
         </Grid>
     )

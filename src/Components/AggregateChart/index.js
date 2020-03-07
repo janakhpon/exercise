@@ -10,6 +10,7 @@ const PageAggregate = (props) => {
 
     let exportDatasetAggregator = []
     let importDatasetAggregator = []
+    let sortHost = []
 
     props.chartdata.map(ch => {
         let data = []
@@ -18,9 +19,39 @@ const PageAggregate = (props) => {
             return data.push(formattedval)
         })
 
-        let formattedvalue = { name: ch.value, data: data}
+        let formattedvalue = {data: data}
         return exportDatasetAggregator.push(formattedvalue)
     })
+
+    
+    exportDatasetAggregator.map(exp => {
+
+        let filteredExportHost = []
+        let filteredHost = []
+
+
+        exp.data.map((eex, key) => {
+            if (eex.index === key){
+                let data = []
+                data.push(eex.value)
+                let filtered = { key, data }
+                filteredHost.push(filtered)
+            }
+            return filteredExportHost.push(filteredHost)
+        })
+
+        // exp.data.map((eex, key) => {
+        //     filterdExportHost = exp.data.filter(fv => fv.index === key)
+        //     let filteredval = { key, data:filterdExportHost}
+        //     return sortHost.push(filteredval)
+        // })
+        
+
+        return console.log(filteredExportHost)
+    })
+    
+    
+    console.log(sortHost)
     props.chartdata.map(ch => {
         let formDataset = {
             label: ch.value,
@@ -46,9 +77,9 @@ const PageAggregate = (props) => {
         return exportDatasetHost.push(formDataset)
     })
 
-    props.chartdata.map(ch => {
+
         let formDataset = {
-            label: ch.value,
+            label: "combination",
             fill: false,
             lineTension: 0.1,
             backgroundColor: 'rgba(75,192,192,0.4)',
@@ -66,10 +97,9 @@ const PageAggregate = (props) => {
             pointHoverBorderWidth: 2,
             pointRadius: 1,
             pointHitRadius: 10,
-            data: ch.imports
+            data: props.chartdata.imports
         }
-        return importDatasetHost.push(formDataset)
-    })
+  importDatasetHost.push(formDataset)
 
     let exportdata = {
         labels: ['2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018'],
@@ -80,8 +110,6 @@ const PageAggregate = (props) => {
         labels: ['2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018'],
         datasets: importDatasetHost
     };
-
-    console.log(exportDatasetAggregator)
 
     const options = { maintainAspectRatio: true }
     return (
