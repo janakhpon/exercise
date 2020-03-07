@@ -9,97 +9,104 @@ const PageAggregate = (props) => {
     let importDatasetHost = []
 
     let exportDatasetAggregator = []
+    let labelfromprops = []
     let importDatasetAggregator = []
     let sortHost = []
 
     props.chartdata.map(ch => {
         let data = []
+        labelfromprops.push(ch.value)
         ch.exports.map((exp, key) => {
-            let formattedval = { index: key, value: exp }
-            return data.push(formattedval)
+            return data.push(exp)
         })
 
-        let formattedvalue = {data: data}
+        let formattedvalue = data
         return exportDatasetAggregator.push(formattedvalue)
     })
 
-    
-    exportDatasetAggregator.map(exp => {
+    let a = exportDatasetAggregator
 
-        let filteredExportHost = []
-        let filteredHost = []
+    let b = []
+
+    for (let i = 0; i < a[0].length; i++) {
+        let count = 0
+        for (let j = 0; j < a.length; j++) {
+            count += a[j][i]
+        }
+        b.push(count)
+    }
 
 
-        exp.data.map((eex, key) => {
-            if (eex.index === key){
-                let data = []
-                data.push(eex.value)
-                let filtered = { key, data }
-                filteredHost.push(filtered)
-            }
-            return filteredExportHost.push(filteredHost)
+    props.chartdata.map(ch => {
+        let data = []
+        ch.imports.map((exp, key) => {
+            return data.push(exp)
         })
 
-        // exp.data.map((eex, key) => {
-        //     filterdExportHost = exp.data.filter(fv => fv.index === key)
-        //     let filteredval = { key, data:filterdExportHost}
-        //     return sortHost.push(filteredval)
-        // })
-        
-
-        return console.log(filteredExportHost)
-    })
-    
-    
-    console.log(sortHost)
-    props.chartdata.map(ch => {
-        let formDataset = {
-            label: ch.value,
-            fill: false,
-            lineTension: 0.1,
-            backgroundColor: 'rgba(75,192,192,0.4)',
-            borderColor: `${colorClasses[getID()]}`,
-            borderCapStyle: 'butt',
-            borderDash: [],
-            borderDashOffset: 0.0,
-            borderJoinStyle: 'miter',
-            pointBorderColor: `${colorClasses[getID()]}`,
-            pointBackgroundColor: '#fff',
-            pointBorderWidth: 1,
-            pointHoverRadius: 5,
-            pointHoverBackgroundColor: `${colorClasses[getID()]}`,
-            pointHoverBorderColor: 'rgba(220,220,220,1)',
-            pointHoverBorderWidth: 2,
-            pointRadius: 1,
-            pointHitRadius: 10,
-            data: ch.exports
-        }
-        return exportDatasetHost.push(formDataset)
+        let formattedvalue = data
+        return importDatasetAggregator.push(formattedvalue)
     })
 
+    let c = importDatasetAggregator
 
-        let formDataset = {
-            label: "combination",
-            fill: false,
-            lineTension: 0.1,
-            backgroundColor: 'rgba(75,192,192,0.4)',
-            borderColor: `${colorClasses[getID()]}`,
-            borderCapStyle: 'butt',
-            borderDash: [],
-            borderDashOffset: 0.0,
-            borderJoinStyle: 'miter',
-            pointBorderColor: `${colorClasses[getID()]}`,
-            pointBackgroundColor: '#fff',
-            pointBorderWidth: 1,
-            pointHoverRadius: 5,
-            pointHoverBackgroundColor: `${colorClasses[getID()]}`,
-            pointHoverBorderColor: 'rgba(220,220,220,1)',
-            pointHoverBorderWidth: 2,
-            pointRadius: 1,
-            pointHitRadius: 10,
-            data: props.chartdata.imports
+    let d = []
+
+    for (let i = 0; i < c[0].length; i++) {
+        let count = 0
+        for (let j = 0; j < c.length; j++) {
+            count += c[j][i]
         }
-  importDatasetHost.push(formDataset)
+        d.push(count)
+    }
+
+    let formDataset = {
+        label: labelfromprops,
+        fill: false,
+        lineTension: 0.1,
+        backgroundColor: 'rgba(75,192,192,0.4)',
+        borderColor: `${colorClasses[getID()]}`,
+        borderCapStyle: 'butt',
+        borderDash: [],
+        borderDashOffset: 0.0,
+        borderJoinStyle: 'miter',
+        pointBorderColor: `${colorClasses[getID()]}`,
+        pointBackgroundColor: '#fff',
+        pointBorderWidth: 1,
+        pointHoverRadius: 5,
+        pointHoverBackgroundColor: `${colorClasses[getID()]}`,
+        pointHoverBorderColor: 'rgba(220,220,220,1)',
+        pointHoverBorderWidth: 2,
+        pointRadius: 1,
+        pointHitRadius: 10,
+        data: b
+    }
+
+    exportDatasetHost.push(formDataset)
+
+
+    let formDataset1 = {
+        label: labelfromprops,
+        fill: false,
+        lineTension: 0.1,
+        backgroundColor: 'rgba(75,192,192,0.4)',
+        borderColor: `${colorClasses[getID()]}`,
+        borderCapStyle: 'butt',
+        borderDash: [],
+        borderDashOffset: 0.0,
+        borderJoinStyle: 'miter',
+        pointBorderColor: `${colorClasses[getID()]}`,
+        pointBackgroundColor: '#fff',
+        pointBorderWidth: 1,
+        pointHoverRadius: 5,
+        pointHoverBackgroundColor: `${colorClasses[getID()]}`,
+        pointHoverBorderColor: 'rgba(220,220,220,1)',
+        pointHoverBorderWidth: 2,
+        pointRadius: 1,
+        pointHitRadius: 10,
+        data: d
+    }
+
+    importDatasetHost.push(formDataset1)
 
     let exportdata = {
         labels: ['2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018'],
