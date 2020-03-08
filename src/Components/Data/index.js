@@ -1,23 +1,20 @@
 import React from 'react'
 import { useQuery } from '@apollo/react-hooks'
+import Alert from '@material-ui/lab/Alert';
+import IconButton from '@material-ui/core/IconButton';
+import Collapse from '@material-ui/core/Collapse';
+import CloseIcon from '@material-ui/icons/Close';
 
 import { GET_COUNTRIES } from '../Queries'
 import Page404 from '../404'
 import PageLoading from '../Loading'
+import styles from '../../Styles/main.module.scss'
 
 export let countryOptions = []
-
-
-// { value: 'USA', label: 'USA', exports: 650, imports: 1200, data: [65, 51, 80, 81, 56, 55, 40, 60, 65, 69, 70, 86] },
-// { value: 'UAE', label: 'UAE', exports: 200, imports: 3400, data: [64, 59, 80, 81, 56, 55, 40, 60, 65, 69, 70, 86] },
-// { value: 'UK', label: 'UK', exports: 300, imports: 2200, data: [63, 59, 82, 81, 56, 55, 40, 60, 65, 69, 70, 86] },
-// { value: 'USSR', label: 'USSR', exports: 400, imports: 6200, data: [62, 49, 70, 71, 46, 55, 42, 63, 65, 79, 80, 76] },
-// { value: 'JP', label: 'JP', exports: 2300, imports: 1200, data: [67, 49, 76, 71, 46, 55, 42, 63, 65, 79, 80, 76] },
-// { value: 'SG', label: 'SG', exports: 800, imports: 7800, data: [61, 49, 79, 71, 46, 55, 42, 63, 65, 79, 80, 76] },
-
 let rawHost = []
 
 const PageData = () => {
+    const [open, setOpen] = React.useState(true);
     const getCountries = useQuery(GET_COUNTRIES)
     if (getCountries.loading) return <PageLoading />
     if (getCountries.error) return <Page404 />
@@ -40,17 +37,44 @@ const PageData = () => {
             let filterdHost = rawHost.filter(raw => raw.value === country.reporterCountry.name)
             let edata = []
             filterdHost.map(fth => {
-                edata.push(fth.exports)
+                return edata.push(fth.exports)
             })
             let idata = []
             filterdHost.map(fth => {
-                idata.push(fth.imports)
+                return idata.push(fth.imports)
             })
-            let formattedvalue = { value: country.reporterCountry.name, label: country.reporterCountry.name, imports: idata, exports: edata }
+
+            let years = []
+            filterdHost.map(fth => {
+                return years.push(fth.years)
+            })
+
+            let formattedvalue = { value: country.reporterCountry.name, label: country.reporterCountry.name, imports: idata, exports: edata, years }
             return countryOptions.push(formattedvalue)
         });
 
-        return null
+        return (
+            <div className={styles.alertContainer}>
+                <Collapse in={open}>
+                    <Alert
+                        action={
+                            <IconButton
+                                aria-label="close"
+                                color="inherit"
+                                size="small"
+                                onClick={() => {
+                                    setOpen(false);
+                                }}
+                            >
+                                <CloseIcon fontSize="inherit" />
+                            </IconButton>
+                        }
+                    >
+                        {countryOptions.length ? countryOptions.length : 0} countries in list
+              </Alert>
+                </Collapse>
+            </div>
+        )
     }
 
 }

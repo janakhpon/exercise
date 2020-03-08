@@ -2,7 +2,7 @@ import { gql } from 'apollo-boost';
 
 export const GET_COUNTRIES = gql`
 {
-  countrystores(start: 2010){
+  countrystores(where: {year_gt: 2009}){
     VImport
     VExport
     year
