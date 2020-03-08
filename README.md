@@ -1,25 +1,24 @@
-# Create React App example
+## Exercise
+  Exercise is a demo app uses Chartjs Multiline Chart Visualization with React and realtime data from Graphql Server. Here is a deployed link [liveonnow](https://exercise-three.now.sh/).
 
-## How to use
+### Usage
+clone the client repository
+    git clone https://github.com/janakhpon/exercise.git
 
-Download the example [or clone the repo](https://github.com/mui-org/material-ui):
+Get into client directory root folder
+    cd exercise
 
-```sh
-curl https://codeload.github.com/mui-org/material-ui/tar.gz/master | tar -xz --strip=2 material-ui-master/examples/create-react-app
-cd create-react-app
-```
+Install Dependencies using [npm](https://www.npmjs.com/)
 
-Install it and run:
+    npm install
+    npm i -d
+    npm run start
+    npm run dev
 
-```sh
-npm install
-npm start
-```
+Install Dependencies using [yarn](https://yarnpkg.com/en/)
 
-or:
+    yarn install
+    yarn add dependencies_name
+    yarn start
+    yarn dev
 
-[![Edit on CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/mui-org/material-ui/tree/master/examples/create-react-app)
-
-## The idea behind the example
-
-This example demonstrates how you can use [Create React App](https://github.com/facebookincubator/create-react-app).
